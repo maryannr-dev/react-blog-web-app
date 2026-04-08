@@ -39,6 +39,7 @@ export default function CommentsForm({postId}) {
     }
 
     const handleClick = () => {
+        error.preventDefault();
         if (comment.name == "" || comment.message == "") {
             window.alert("Name or comment missing");
             return;
