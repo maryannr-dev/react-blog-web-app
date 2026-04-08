@@ -43,15 +43,19 @@ export default function CommentsForm({postId}) {
             window.alert("Name or comment missing");
             return;
         }
-        axios.post(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`, {
-            name: comment.name,
-            body: comment.message,
-            postId: parseInt(postId)
-        }).then(res => {
-            console.log(res);
-            setComment({ name: "", message: "" });
-            fetchComments();
-        });
+        try {
+            axios.post(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`, {
+                name: comment.name,
+                body: comment.message,
+                postId: parseInt(postId)
+            }).then(res => {
+                console.log(res);
+                setComment({ name: "", message: "" });
+                fetchComments();
+            });
+        } catch (error) {
+            window.alert("Error posting comment: ", error);
+        }
     }
 
     return (
