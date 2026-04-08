@@ -9,6 +9,9 @@ export default function CommentsForm({postId}) {
         name: "",
         message: ""
     });
+    const [ignored, setIgnored] = useState(0);
+
+    const forceUpdate = () => setIgnored(prev => prev + 1);
     
     useEffect(() => {
         const fetchComments = async () => {
@@ -46,7 +49,7 @@ export default function CommentsForm({postId}) {
             name: comment.name,
             body: comment.message
         }).then(res => console.log(res));
-        
+        forceUpdate();
     }
 
     return (
