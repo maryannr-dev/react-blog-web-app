@@ -38,8 +38,8 @@ export default function CommentsForm({postId}) {
         });
     }
 
-    const handleClick = () => {
-        error.preventDefault();
+    const handleClick = (e) => {
+        e.preventDefault();
         if (comment.name == "" || comment.message == "") {
             window.alert("Name or comment missing");
             return;
