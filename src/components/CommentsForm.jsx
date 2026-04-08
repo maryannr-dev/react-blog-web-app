@@ -60,12 +60,12 @@ export default function CommentsForm({postId}) {
 
     return (
         <section className={styles.comments}>
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={handleClick}>
                 <label className={styles.label} htmlFor="name">Name</label>
                 <input className={styles.input1} type="text" id="name" value={comment.name} onChange={handleNameChange} />
                 <label className={styles.label} htmlFor="comment">Comment</label>
                 <textarea className={styles.input} id="comment" rows="5" value={comment.message} onChange={handleCommentChange}></textarea>
-                <button className={styles.button} type="submit" onClick={handleClick}>Post Comment</button>
+                <button className={styles.button} type="submit">Post Comment</button>
             </form>
             <div className={styles.sect}>
                 {comments.length === 0 ? (
