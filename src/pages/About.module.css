@@ -1,0 +1,13 @@
+.about{
+    padding:1rem 3rem;
+}
+.heading{
+    font-family:'Playfair Display',serif;
+    color:var(--text-gray);
+    text-align:center;
+}
+.paragraph{
+    font-family:'Inter',sans-serif;
+    color:var(--text-gray);
+    text-align:center;
+}

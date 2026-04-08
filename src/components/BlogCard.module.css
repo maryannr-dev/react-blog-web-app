@@ -1,0 +1,17 @@
+.card {
+  background: #d6a4a42c;
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 600px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+.card > h2{
+  font-family:'Playfair Display',serif;
+  color:var(--text-gray);
+
+}
+.card  p{
+  font-family:'Inter',sans-serif;
+  color:var(--text-gray);
+}

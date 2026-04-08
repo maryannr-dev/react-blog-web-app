@@ -1,0 +1,8 @@
+.footer { 
+    text-align: center; 
+    padding: 1rem; 
+    margin-top: 1rem; 
+    border-radius:10px;
+    font-family:'Inter',sans-serif;
+    color:var(--muted-rose);
+}

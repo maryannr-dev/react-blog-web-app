@@ -1,0 +1,11 @@
+:root{
+    --soft-blush: #f8e8ee;
+    --cream: #fdfaf6;
+    --muted-rose:#d6a4a4;
+    --muted-rose-transparent:#d6a4a42c;
+    --text-gray: #836a6a;
+}
+body{
+    background-color: var(--cream);
+}
+

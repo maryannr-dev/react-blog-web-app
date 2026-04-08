@@ -1,0 +1,16 @@
+.post{
+    padding:1rem;
+}
+.heading{
+    font-family:'Playfair Display',serif;
+    color:var(--text-gray);
+    margin:0.25rem 0;
+}
+.authordate{
+    font-family:'Inter',sans-serif;
+    color:var(--text-gray);
+}
+.content{
+    font-family:'Inter',sans-serif;
+    color:var(--text-gray);
+}
