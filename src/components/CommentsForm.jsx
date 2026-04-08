@@ -9,20 +9,18 @@ export default function CommentsForm({postId}) {
         name: "",
         message: ""
     });
-    const [ignored, setIgnored] = useState(0);
 
-    const forceUpdate = () => setIgnored(prev => prev + 1);
+    const fetchComments = async () => {
+        try {
+            const commentsRes = await axios.get(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
+            const commentsData = commentsRes.data;
+            setComments(commentsData);
+        } catch (error) {
+            console.log("Error fetching comments: ", error);
+        }
+    }
     
     useEffect(() => {
-        const fetchComments = async () => {
-            try {
-                const commentsRes = await axios.get(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
-                const commentsData = commentsRes.data;
-                setComments(commentsData);
-            } catch (error) {
-                console.log("Error fetching comments: ", error);
-            }
-        }
         fetchComments();
     },[postId]);
 
@@ -48,8 +46,11 @@ export default function CommentsForm({postId}) {
         axios.post(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`, {
             name: comment.name,
             body: comment.message
-        }).then(res => console.log(res));
-        forceUpdate();
+        }).then(res => {
+            console.log(res);
+            setComment({ name: "", message: "" });
+            fetchComments();
+        });
     }
 
     return (
