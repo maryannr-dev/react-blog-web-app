@@ -45,7 +45,8 @@ export default function CommentsForm({postId}) {
         }
         axios.post(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`, {
             name: comment.name,
-            body: comment.message
+            body: comment.message,
+            postId: parseInt(postId)
         }).then(res => {
             console.log(res);
             setComment({ name: "", message: "" });
