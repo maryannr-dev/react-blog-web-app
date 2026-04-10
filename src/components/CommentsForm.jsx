@@ -9,53 +9,62 @@ export default function CommentsForm({postId}) {
         name: "",
         message: ""
     });
-
-    const fetchComments = async () => {
-        try {
-            const commentsRes = await axios.get(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
-            const commentsData = commentsRes.data;
-            setComments(commentsData);
-        } catch (error) {
-            console.log("Error fetching comments: ", error);
-        }
-    }
-    
+ 
     useEffect(() => {
+        const fetchComments = async () => {
+            try {
+                const commentsRes = await axios.get(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`,);
+                const commentsData = commentsRes.data;
+                setComments(commentsData);
+            } catch (error) {
+                console.log("Error fetching comments: ", error);
+            }
+        }
         fetchComments();
     },[postId]);
 
     const handleNameChange = (event) => {
-        setComment({
-            name: event.target.value,
-            message: comment.message
-        });
+        setComment((prevComment) => ({
+            ...prevComment,
+            name: event.targe.value,
+        }));
     }
 
     const handleCommentChange = (event) => {
-        setComment({
-            name: comment.name,
-            message: event.target.value
-        });
+        setComment((prevComment) => ({
+            ...prevComment,
+            message: event.targe.value,
+        }));
     }
 
-    const handleClick = (e) => {
-        e.preventDefault();
+    const handleClick = async (event) => {
+        event.preventDefault();
         if (comment.name == "" || comment.message == "") {
             window.alert("Name or comment missing");
             return;
         }
         try {
-            axios.post(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`, {
-                name: comment.name,
-                body: comment.message,
-                postId: parseInt(postId)
-            }).then(res => {
-                console.log(res);
-                setComment({ name: "", message: "" });
-                fetchComments();
+            const response = await axios.post(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`,
+                {
+                    name: comment.name,
+                    message: comment.message,
+                },
+            );
+            setComments((prevComments) => [
+                ...prevComments,
+                {
+                    id: response.data.id ?? Date.now(),
+                    name: comment.name,
+                    body: comment.message,
+                },
+            ]);
+
+            setComment({
+                    name: "",
+                    message: "",
             });
         } catch (error) {
-            window.alert("Error posting comment: ", error);
+            console.log("Error posting comment: ", error);
         }
     }
 
