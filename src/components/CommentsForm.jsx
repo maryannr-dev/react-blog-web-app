@@ -26,14 +26,14 @@ export default function CommentsForm({postId}) {
     const handleNameChange = (event) => {
         setComment((prevComment) => ({
             ...prevComment,
-            name: event.targe.value,
+            name: event.target.value,
         }));
     }
 
     const handleCommentChange = (event) => {
         setComment((prevComment) => ({
             ...prevComment,
-            message: event.targe.value,
+            message: event.target.value,
         }));
     }
 
