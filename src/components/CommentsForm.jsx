@@ -2,6 +2,8 @@ import { useState } from 'react';
 import styles from "./CommentsForm.module.css";
 import { useEffect } from 'react';
 import axios from 'axios';
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function CommentsForm({postId}) {
     const [comments, setComments] = useState([]);
@@ -9,6 +11,8 @@ export default function CommentsForm({postId}) {
         name: "",
         message: ""
     });
+
+    const { user } = useContext(AuthContext);
  
     useEffect(() => {
         const fetchComments = async () => {
@@ -70,13 +74,19 @@ export default function CommentsForm({postId}) {
 
     return (
         <section className={styles.comments}>
-            <form className={styles.form} onSubmit={handleClick}>
-                <label className={styles.label} htmlFor="name">Name</label>
-                <input className={styles.input1} type="text" id="name" value={comment.name} onChange={handleNameChange} />
-                <label className={styles.label} htmlFor="comment">Comment</label>
-                <textarea className={styles.input} id="comment" rows="5" value={comment.message} onChange={handleCommentChange}></textarea>
-                <button className={styles.button} type="submit">Post Comment</button>
-            </form>
+            {user ? (
+                <form className={styles.form} onSubmit={handleClick}>
+                    <label className={styles.label} htmlFor="name">Name</label>
+                    <input className={styles.input1} type="text" id="name" value={comment.name} onChange={handleNameChange} />
+                    <label className={styles.label} htmlFor="comment">Comment</label>
+                    <textarea className={styles.input} id="comment" rows="5" value={comment.message} onChange={handleCommentChange}></textarea>
+                    <button className={styles.button} type="submit">Post Comment</button>
+                </form>
+            ) :
+                (
+                    <p>Please log in to leave a comment !!</p>
+                )
+            }
             <div className={styles.sect}>
                 {comments.length === 0 ? (
                     <p>No comments yet!</p>
